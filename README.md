@@ -1,1 +1,3 @@
-# expo-websockets
+# Expo WebSockets
+
+Proof of concept
