@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FC, ReactNode, createContext, useEffect, useMemo, useState } from 'react'
-import randomString from 'randomstring'
 import { Storage } from '../enums/Storage'
 import { Message } from '../types'
+import { dummyMessages } from '../utils/dummy-messages'
+import { getRandomNickname } from '../utils/random'
 
 interface Props {
   children: ReactNode
@@ -15,24 +16,8 @@ interface AppContextType {
   addMessage: (message: Message) => void
 }
 
-const randomStringOpts = {
-  length: 4,
-  readable: true,
-  charset: 'hex',
-}
-
-const dummyMessages: Message[] = [
-  { id: 1, author: 'Alex', text: 'Bonjour, ça va ?' },
-  { id: 2, author: 'Magela', text: 'Tranquille et toi ?' },
-  { id: 3, author: 'Thomas', text: 'Bien bien' },
-  { id: 5, author: 'Alex', text: 'Super !' },
-  { id: 4, author: 'Magela', text: 'Vous avez valider MOBP-4242 ?' },
-  { id: 6, author: 'Thomas', text: "Yes c'est bon" },
-  { id: 7, author: 'Alex', text: 'Top !' },
-]
-
 const defaultContext: AppContextType = {
-  nickname: `user#${randomString.generate(randomStringOpts)}`,
+  nickname: getRandomNickname(),
   updateNickname: () => {},
   // messages: [],
   messages: dummyMessages,

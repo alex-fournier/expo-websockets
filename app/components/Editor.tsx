@@ -2,7 +2,7 @@ import { FC, useContext, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { MD3LightTheme, TextInput } from 'react-native-paper'
 import { AppContext } from '../context/AppContext'
-import randomString from 'randomstring'
+import { getRandomId } from '../utils/random'
 
 const styles = StyleSheet.create({
   container: {
@@ -21,7 +21,7 @@ export const Editor: FC = () => {
   const [value, setValue] = useState('')
 
   const handleSendMessage = () => {
-    addMessage({ id: randomString.generate(), me: true, author: nickname, text: value })
+    addMessage({ id: getRandomId(), me: true, author: nickname, text: value })
     setValue('')
   }
 
