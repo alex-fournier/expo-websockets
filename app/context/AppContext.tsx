@@ -2,7 +2,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FC, ReactNode, createContext, useEffect, useMemo, useState } from 'react'
 import { Storage } from '../enums/Storage'
 import { Message } from '../types'
-import { dummyMessages } from '../utils/dummy-messages'
 import { getRandomNickname } from '../utils/random'
 
 interface Props {
@@ -19,8 +18,7 @@ interface AppContextType {
 const defaultContext: AppContextType = {
   nickname: getRandomNickname(),
   updateNickname: () => {},
-  // messages: [],
-  messages: dummyMessages,
+  messages: [],
   addMessage: () => {},
 }
 

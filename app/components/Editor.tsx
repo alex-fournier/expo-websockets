@@ -3,6 +3,8 @@ import { View, StyleSheet } from 'react-native'
 import { MD3LightTheme, TextInput } from 'react-native-paper'
 import { AppContext } from '../context/AppContext'
 import { getRandomId } from '../utils/random'
+import { useWebSockets } from '../hooks/useWebSockets'
+import { Message } from '../types'
 
 const styles = StyleSheet.create({
   container: {
@@ -19,9 +21,12 @@ const styles = StyleSheet.create({
 export const Editor: FC = () => {
   const { addMessage, nickname } = useContext(AppContext)
   const [value, setValue] = useState('')
+  const sendMessage = useWebSockets()
 
   const handleSendMessage = () => {
-    addMessage({ id: getRandomId(), me: true, author: nickname, text: value })
+    const message: Message = { id: getRandomId(), me: false, author: nickname, text: value }
+    sendMessage(message)
+    addMessage({ ...message, me: true })
     setValue('')
   }
 
